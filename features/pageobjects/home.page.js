@@ -1,4 +1,4 @@
-const { $ } = require("@wdio/globals");
+const { $, expect } = require("@wdio/globals");
 const Page = require("./page");
 
 class HomePage extends Page {
@@ -30,12 +30,6 @@ class HomePage extends Page {
   async validateProblemUser() {
     await expect(browser).toHaveUrlContaining("/inventory.html");
     await expect(this.iconSort).not.toBeSelected();
-  }
-
-  async validatePerformanceUser() {
-    await expect(browser).toHaveUrlContaining("/inventory.html");
-    await this.appLogo.waitForDisplayed({ timeout: 500 });
-    await expect(this.appLogo).toBeDisplayed();
   }
 
   async validateErrorUser() {

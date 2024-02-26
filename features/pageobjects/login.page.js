@@ -1,4 +1,4 @@
-const { $ } = require("@wdio/globals");
+const { $, expect } = require("@wdio/globals");
 const Page = require("./page");
 
 class LoginPage extends Page {
@@ -16,19 +16,7 @@ class LoginPage extends Page {
 
   errorLockedOutUser = (message) => $(`//h3[text()="${message}"]`);
 
-  get invalidCredentials() {
-    return $(
-      '//h3[text()="Epic sadface: Username and password do not match any user in this service"]'
-    );
-  }
-
-  get usernameRequired() {
-    return $('//h3[text()="Epic sadface: Username is required"]');
-  }
-
-  get passwordRequired() {
-    return $('//h3[text()="Epic sadface: Password is required"]');
-  }
+  invalidCredentials = (msg5) => $(`//h3[text()="${msg5}"]`);
 
   async login(username) {
     await this.fieldUsername.waitForDisplayed({ timeout: 2500 });
@@ -42,16 +30,8 @@ class LoginPage extends Page {
     await expect(this.errorLockedOutUser(message)).toBeDisplayed();
   }
 
-  async validateInvalidCredentials() {
-    await expect(this.invalidCredentials).toBeDisplayed();
-  }
-
-  async validateEmptyUsername() {
-    await expect(this.usernameRequired).toBeDisplayed();
-  }
-
-  async validateEmptyPassword() {
-    await expect(this.passwordRequired).toBeDisplayed();
+  async validateInvalidCredentials(msg5) {
+    await expect(this.invalidCredentials(msg5)).toBeDisplayed();
   }
 
   open() {

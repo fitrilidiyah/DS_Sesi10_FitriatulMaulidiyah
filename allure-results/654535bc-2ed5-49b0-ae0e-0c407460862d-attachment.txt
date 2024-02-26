@@ -1,4 +1,0 @@
-{
-  "using": "xpath",
-  "value": "//h3[text()=\"Epic sadface: Sorry, this user has been locked out.\"]"
-}
